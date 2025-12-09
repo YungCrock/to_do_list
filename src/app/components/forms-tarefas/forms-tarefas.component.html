@@ -1,0 +1,47 @@
+<header>
+  <h1 class="title">Tarefas</h1>
+</header>
+
+<section class="container-form">
+  <h2 class="title">Nova tarefa</h2>
+
+  <form (ngSubmit)="salvar()" class="form">
+    <div class="content">
+      <label>Título</label>
+      <input class="text" [(ngModel)]="titulo" name="titulo" required />
+    </div>
+
+    <div class="content">
+      <label>Descrição</label>
+      <input class="text" [(ngModel)]="descricao" name="descricao" />
+    </div>
+
+    <div class="content">
+      <label>Prazo</label>
+      <input
+        class="text"
+        type="date"
+        [(ngModel)]="prazo"
+        name="prazo"
+        required
+      />
+    </div>
+
+    <div class="content">
+      <label>Concluída?</label>
+      <input type="checkbox" [(ngModel)]="concluida" name="concluida" />
+    </div>
+
+    <div class="content-btn">
+      <button class="salvar" type="submit" [disabled]="salvando">{{ editandoId ? "Salvar alterações" : "Criar tarefa" }}</button>
+    </div>
+  </form>
+
+  @if (erro) {
+  <p style="color: red">{{ erro }}</p>
+  }
+</section>
+
+<footer>
+  <p>Made by Enzo Aguiar e Lucas Keiji</p>
+</footer>

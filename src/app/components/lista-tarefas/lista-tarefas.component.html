@@ -1,0 +1,48 @@
+<header>
+  <h1 class="title">Tarefas</h1>
+</header>
+
+<section class="container-list">
+  <h2 class="title">Lista de tarefas</h2>
+
+  <button class="recarregar" (click)="carregar()" [disabled]="carregando">
+    Recarregar
+  </button>
+
+  <button class="adicionar" routerLink="forms-tarefas">Adicionar tarefa</button>
+
+  @if (carregando) {
+  <p>Carregando…</p>
+  } @else { @if (tarefas.length === 0) {
+  <p>Nenhuma tarefa encontrada.</p>
+  } @else {
+  <table>
+    <tr>
+      <th>Título</th>
+      <th>Descrição</th>
+      <th>Prazo</th>
+      <th>Status</th>
+      <th></th>
+      <th></th>
+    </tr>
+    @for (t of tarefas; track t._id) {
+    <tr>
+      <td>{{ t.titulo }}</td>
+      <td>{{ t.descricao || "Sem descrição" }}</td>
+      <td>{{ t.prazo | date : "dd/MM/yyyy" }}</td>
+      <td>{{ t.concluida ? "Concluída" : "Pendente" }}</td>
+      <td>
+        <button class="editar" [routerLink]="['/editar', t._id]">Editar</button>
+      </td>
+      <td class="col-acoes">
+        <button class="excluir" (click)="excluir(t._id!)">Excluir</button>
+      </td>
+    </tr>
+    }
+  </table>
+  } }
+</section>
+
+<footer>
+  <p>Made by Enzo Aguiar e Lucas Keiji</p>
+</footer>
