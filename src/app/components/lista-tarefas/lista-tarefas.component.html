@@ -12,35 +12,51 @@
   <button class="adicionar" routerLink="forms-tarefas">Adicionar tarefa</button>
 
   @if (carregando) {
-  <p>Carregando…</p>
-  } @else { @if (tarefas.length === 0) {
-  <p>Nenhuma tarefa encontrada.</p>
+    <p>Carregando…</p>
   } @else {
-  <table>
-    <tr>
-      <th>Título</th>
-      <th>Descrição</th>
-      <th>Prazo</th>
-      <th>Status</th>
-      <th></th>
-      <th></th>
-    </tr>
-    @for (t of tarefas; track t._id) {
-    <tr>
-      <td>{{ t.titulo }}</td>
-      <td>{{ t.descricao || "Sem descrição" }}</td>
-      <td>{{ t.prazo | date : "dd/MM/yyyy" }}</td>
-      <td>{{ t.concluida ? "Concluída" : "Pendente" }}</td>
-      <td>
-        <button class="editar" [routerLink]="['/editar', t._id]">Editar</button>
-      </td>
-      <td class="col-acoes">
-        <button class="excluir" (click)="excluir(t._id!)">Excluir</button>
-      </td>
-    </tr>
+
+    @if (tarefas.length === 0) {
+      <p>Nenhuma tarefa encontrada.</p>
+    } @else {
+
+      <table>
+        <tr>
+          <th>Título</th>
+          <th>Descrição</th>
+          <th>Prazo</th>
+          <th>Status</th>
+          <th></th>
+          <th></th>
+        </tr>
+
+        @for (t of tarefas; track t._id) {
+          <tr>
+            <td>{{ t.titulo }}</td>
+            <td>{{ t.descricao || "Sem descrição" }}</td>
+            <td>{{ t.prazo | date : "dd/MM/yyyy" }}</td>
+
+            <td class="col-status">
+              <input type="checkbox"
+                     [checked]="t.concluida"
+                     (change)="alterarStatus(t)" />
+              <span>{{ t.concluida ? "Concluída" : "Pendente" }}</span>
+            </td>
+
+            <td class="col-acoes">
+              <i class="bi bi-pencil-square icon-editar"
+                 [routerLink]="['/editar', t._id]"></i>
+            </td>
+
+            <td class="col-acoes">
+              <i class="bi bi-trash-fill icon-excluir"
+                 (click)="excluir(t._id!)"></i>
+            </td>
+          </tr>
+        }
+      </table>
+
     }
-  </table>
-  } }
+  }
 </section>
 
 <footer>
