@@ -183,7 +183,7 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 9999; /* overlay acima de tudo */
+  z-index: 9999; 
 }
 
 .modal {
@@ -192,7 +192,7 @@ footer {
   border-radius: 8px;
   width: 350px;
   box-shadow: 0 0 20px rgba(0,0,0,0.2);
-  z-index: 10000; /* modal acima do overlay */
+  z-index: 10000; 
 }
 
 .modal-buttons {
